@@ -124,6 +124,10 @@ function getPosition(e) {
 function addEntity(entity, data) {
     world[entity] = data;
     drawNextFrame(); // (but should we?)
+    let update = {
+        entity: data
+    };
+    socket.send(JSON.stringify(update));
     //XXX: Send a XHTML Request that updates the entity you just modified!
 }
 var counter = 0;
@@ -254,15 +258,34 @@ function wsSetup() {
     socket = new WebSocket(url);
     socket.onopen = function() {
         //XXX: TODO What are you going to do here?
+        console.log("socket successfully opened");
     };
     socket.onerror = function(msg) {
         debug("WebSocket Error:" + msg.data);
     };
+    //websocket.onmessage = function(event){
+    //tweetStream.innerHTML += event.data;
+    //websocket.send("done");
+//}
     socket.onmessage = function(msg) {  
         try {
             debug("WebSocket Recv:" + msg.data);
+            console.log(msg.data);
+            let entities = msg.data;
+            // https://stackoverflow.com/questions/684672/how-do-i-loop-through-or-enumerate-a-javascript-object
+            //for(let entity of entities){
+            //    world[]
+            //}
+            for(let entity in entities){
+                console.log("entities object at entity")
+                // entity = key and entities[entity] = value
+                word[entity]=entities[entity];
+            }
+            // drawNext=true; this does same as below
+            drawNextFrame();
             //XXX: TODO What are you going to do here?            
         } catch (e) {
+            console.log(e);
             alert("socket on message: " + e);
         }
     }; 
