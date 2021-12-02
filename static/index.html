@@ -22,9 +22,9 @@
     "/>
     <script src="json2.js"></script>
   </head> 
-  <body bgcolor="white" height="100%" width="100%"> 
+  <body bgcolor="rainbow" height="100%" width="100%"> 
     <div id="debug"></div>
-    <canvas id="c" width="100%" height="100%" style="-webkit-tap-highlight-color: transparent;"></canvas> 
+    <canvas  id="c" width="100%" height="100%" style="-webkit-tap-highlight-color: yellowgreen;"></canvas> 
 
     <script>
       // Fix me
@@ -67,7 +67,6 @@ function prepEntity(entity) {
         else{
             entity["colour"] = "#FE1234";
         }
-        k+=1;
     }
     if (!entity["radius"]) {
         if(k%2==0){
@@ -260,10 +259,8 @@ mouse.mouseuppers.push(function(x,y,clicked,e) {
     if(k%2===0){
         addEntityWithoutName({'x':x,'y':y,'colour':'red'});
     }
-    else if(k%3===0){
-        addEntityWithoutName({'x':x,'y':y,'colour':'red'});
-        addEntityWithoutName({'x':x+1,'y':y-1,'colour':'pink'});
-    }
+    
+    
     else{
         addEntityWithoutName({'x':x,'y':y,'colour':'yellow'});
     }
@@ -273,11 +270,11 @@ mouse.mouseuppers.push(function(x,y,clicked,e) {
 mouse.mousedraggers.push(function(x,y,clicked,e) {
     k+=1;
     if(k%2===0){
-        addEntityWithoutName({'x':x,'y':y,'colour':'white',
+        addEntityWithoutName({'x':x,'y':y,'colour':'LavenderBlush',
                           'radius':40});
     }
     else{
-        addEntityWithoutName({'x':x,'y':y,'colour':'green',
+        addEntityWithoutName({'x':x,'y':y,'colour':'DeepSkyBlue',
                           'radius':20});
     }
     
