@@ -101,14 +101,18 @@ def subscribe_socket(ws):
     # this mean we have new client
     # to represent new client add a gevent.queue to clientList
     # then instantiate world for client
-    """spawn(function, *args, **kwargs) → Greenlet
-Create a new Greenlet object and schedule it to run function(*args, **kwargs). This can be used as gevent.spawn or Greenlet.spawn.
+    
+    """spawn(function, *args, **kwargs) → Greenlet ||| (function, arg, arg)
+Create a new Greenlet object and schedule it to run function(*args, **kwargs).
+
+ This can be used as gevent.spawn or Greenlet.spawn.
 
 The arguments are passed to Greenlet.__init__()."""
     client:queue.Queue = queue.Queue()
     clientList.append(client)
     greenlet = gevent.spawn(read_ws,ws,client)
     client.put_nowait(json.dumps(myWorld.world()))
+    # https://stackoverflow.com/questions/31016484/use-while-true-in-geventgreenlets-the-program-will-stop-gradually
     try:
         while True:
             print("update sent if this goes thru")
