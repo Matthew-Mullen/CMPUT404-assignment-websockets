@@ -253,29 +253,34 @@ mouse.mousedowners.push(function(x,y,clicked,e) {
     else{
         addEntityWithoutName({'x':x,'y':y,'colour':'pink'});
     }
-    k+=1;
+    
 });
 
 mouse.mouseuppers.push(function(x,y,clicked,e) {
-    if(k%2==0){
+    if(k%2===0){
         addEntityWithoutName({'x':x,'y':y,'colour':'red'});
     }
-    else{
-        addEntityWithoutName({'x':x,'y':y,'colour':'orange'});
+    else if(k%3===0){
+        addEntityWithoutName({'x':x,'y':y,'colour':'red'});
+        addEntityWithoutName({'x':x+1,'y':y-1,'colour':'pink'});
     }
-    k+=1;
+    else{
+        addEntityWithoutName({'x':x,'y':y,'colour':'yellow'});
+    }
+    
 });
 
 mouse.mousedraggers.push(function(x,y,clicked,e) {
-    if(k%2==0){
-        addEntityWithoutName({'x':x,'y':y,'colour':'purple',
-                          'radius':10});
+    k+=1;
+    if(k%2===0){
+        addEntityWithoutName({'x':x,'y':y,'colour':'white',
+                          'radius':40});
     }
     else{
         addEntityWithoutName({'x':x,'y':y,'colour':'green',
-                          'radius':10});
+                          'radius':20});
     }
-    k+=1;
+    
 });
 
 
@@ -310,7 +315,7 @@ function wsSetup() {
             for(let entity in entities){
                 console.log("entities object at entity")
                 // entity = key and entities[entity] = value
-                word[entity]=entities[entity];
+                world[entity]=entities[entity];
             }
             // drawNext=true; this does same as below
             drawNextFrame();
